@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateUserDto } from 'src/users/dtos/createUser.dto';
+import { bodyUserDto } from 'src/users/dtos/bodyUser.dto';
 import { UsersService } from 'src/users/service/users/users.service';
 
 @Controller('users')
@@ -16,23 +16,31 @@ export class UsersController {
 
   @Get()
   GetUsers() {
-    return this.usersService.findUsers();
+    return this.usersService.findAll();
+  }
+
+  @Get(':account_id')
+  GetUserDetail(@Param('account_id') account_id: number) {
+    return this.usersService.findOne(account_id);
   }
 
   @Post()
-  CreateUser(@Body() CreateUserDto: CreateUserDto) {
-    // const { ...useDetail } = CreateUserDto;
-    return this.usersService.CreateUser(CreateUserDto);
+  CreateUser(@Body() bodyUserDto: bodyUserDto) {
+    return this.usersService.create(bodyUserDto);
   }
 
-  @Put(':id')
-  async UpdateUser(@Param('id') id: number, @Body() UpdateUser: CreateUserDto) {
-    return await this.usersService.UpdateUser(id, UpdateUser);
+  @Put(':account_id')
+  async UpdateUser(
+    @Param('account_id') account_id: number,
+    @Body() UpdateUser: bodyUserDto,
+  ) {
+    await this.usersService.edit(account_id, UpdateUser);
+    return this.GetUsers();
   }
 
-  @Delete(':id')
-  DeleteUser(@Param('id') id: number) {
-    if (this.usersService.DeleteUser(id)) return true;
-    else return false;
+  @Delete(':account_id')
+  async DeleteUser(@Param('account_id') account_id: number) {
+    await this.usersService.reomve(account_id);
+    return this.GetUsers;
   }
 }
