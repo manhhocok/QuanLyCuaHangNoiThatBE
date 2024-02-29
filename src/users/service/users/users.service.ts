@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/typeom/entities/user.entity';
-import { CreateUserParams } from 'src/utils/type';
+import { bodyUserParams } from 'src/utils/type';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -10,21 +10,25 @@ export class UsersService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  findUsers() {
+  findAll() {
     return this.userRepository.find();
   }
 
-  CreateUser(userDetail: CreateUserParams) {
+  findOne(account_id: number) {
+    return this.userRepository.findOneBy({ account_id });
+  }
+
+  create(userDetail: bodyUserParams) {
     const newUser = this.userRepository.create({ ...userDetail });
     return this.userRepository.save(newUser);
   }
 
-  UpdateUser(id: number, userDetail: CreateUserParams) {
-    return this.userRepository.update(id, { ...userDetail });
+  edit(account_id: number, userDetail: bodyUserParams) {
+    return this.userRepository.update(account_id, { ...userDetail });
   }
 
-  DeleteUser(id: number) {
-    if (this.userRepository.delete(id)) return true;
+  reomve(account_id: number) {
+    if (this.userRepository.delete(account_id)) return true;
     else return false;
   }
 }

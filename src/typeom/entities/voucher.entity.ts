@@ -1,0 +1,13 @@
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity({ name: 'voucher' })
+export class Voucher {
+  @PrimaryGeneratedColumn()
+  voucher_id: number;
+  @Column()
+  name: string;
+  @Column()
+  description: string;
+  @Column()
+  image: string;
+}
