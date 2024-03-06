@@ -18,12 +18,8 @@ module.exports = function (options, webpack) {
       }),
       new RunScriptWebpackPlugin({
         name: options.output.filename,
-        autoRestart: true,
+        autoRestart: false,
       }),
     ],
-    output: {
-      path: path.resolve(__dirname, 'public'), // Cấu hình đường dẫn đến thư mục đầu ra
-      filename: 'bundle.js', // Tên tệp tin đầu ra
-    },
   };
 };
