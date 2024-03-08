@@ -10,13 +10,13 @@ import {
 import { bodyCustomerDto } from 'src/customer_orders/dtos/bodyCustomer.dto';
 import { CustomerOrdersService } from 'src/customer_orders/services/customer_orders/customer_orders.service';
 
-@Controller('customer_orders')
+@Controller('api/customer_orders')
 export class CustomerOrdersController {
   constructor(private CustomerOrdersService: CustomerOrdersService) {}
 
   @Get()
-  getListCustomerOrders() {
-    return this.CustomerOrdersService.findAll();
+  async getListCustomerOrders() {
+    return await this.CustomerOrdersService.findAll();
   }
 
   @Get(':order_id')

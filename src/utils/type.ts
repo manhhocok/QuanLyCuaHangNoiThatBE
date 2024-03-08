@@ -1,3 +1,6 @@
+import { Category } from 'src/typeom/entities/category.entity';
+import { ProductType } from 'src/typeom/entities/product_type.entity';
+
 export type bodyUserParams = {
   email: string;
   password: string;
@@ -27,19 +30,19 @@ export type bodyVoucherParams = {
 export type bodyProductParams = {
   listed_price: number;
   price: number;
-  name: number;
+  name: string;
   material: string;
   dimensions: string;
   available: string;
   description: string;
   image: string;
-  type_id: number;
-  category_id: number;
+  productType: ProductType;
+  category: Category;
 };
 
 export type bodyCustomerOrderParams = {
-  account_id: number;
-  product_id: number;
+  user: bodyUserParams;
+  product: bodyProductParams;
   voucher: number;
   listed_price: number;
   price: number;

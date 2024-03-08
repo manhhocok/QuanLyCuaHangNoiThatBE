@@ -12,11 +12,16 @@ export class CustomerOrdersService {
   ) {}
 
   findAll() {
-    return this.repository.find();
+    return this.repository.find({ relations: ['product', 'user'] });
   }
 
   findOne(order_id: number) {
-    return this.repository.findOneBy({ order_id });
+    return this.repository.findOne({
+      where: {
+        order_id,
+      },
+      relations: ['product', 'user'],
+    });
   }
 
   create(body: bodyCustomerOrderParams) {

@@ -10,7 +10,7 @@ import {
 import { bodyCategorieDto } from 'src/categories/dtos/bodyCategory.dto';
 import { CategoriesService } from 'src/categories/services/categories/categories.service';
 
-@Controller('categories')
+@Controller('api/categories')
 export class CategoriesController {
   constructor(private CategoriesService: CategoriesService) {}
 

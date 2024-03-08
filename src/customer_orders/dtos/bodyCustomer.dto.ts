@@ -1,6 +1,9 @@
+import { bodyProductDto } from 'src/products/dtos/bodyProduct.dto';
+import { bodyUserDto } from 'src/users/dtos/bodyUser.dto';
+
 export class bodyCustomerDto {
-  account_id: number;
-  product_id: number;
+  user: bodyUserDto;
+  product: bodyProductDto;
   voucher: number;
   listed_price: number;
   price: number;
