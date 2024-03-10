@@ -11,27 +11,31 @@ import {
 import { Category } from './category.entity';
 import { ProductType } from './product_type.entity';
 import { CustomerOrder } from './customer_order.entity';
+import { Material } from './materials.entity';
 
 @Entity({ name: 'product' })
 export class Product {
   @PrimaryGeneratedColumn()
   product_id: number;
-  @Column()
+  @Column({ default: 0 })
   listed_price: number;
-  @Column()
+  @Column({ default: 0 })
   price: number;
-  @Column()
+  @Column('varchar', { length: 255 })
   name: string;
-  @Column()
-  material: string;
-  @Column()
+  @Column('varchar', { length: 255 })
   dimensions: string;
-  @Column()
+  @Column('varchar', { length: 255 })
   available: string;
-  @Column()
+  @Column('varchar', { length: 2550 })
   description: string;
-  @Column()
+  @Column('varchar', { length: 1255 })
   image: string;
+  @Column({ default: true })
+  status: boolean;
+  @ManyToOne(() => Material, (productType) => productType.material_id)
+  @JoinColumn({ name: 'material_id' })
+  material: Material;
 
   @ManyToOne(() => ProductType, (productType) => productType.type_id)
   @JoinColumn({ name: 'type_id' })

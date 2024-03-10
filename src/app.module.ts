@@ -18,6 +18,7 @@ import { CustomerOrder } from './typeom/entities/customer_order.entity';
 import { dataSourceOptions } from 'db/data-source';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { MaterialsModule } from './materials/materials.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
@@ -39,6 +40,7 @@ import { APP_GUARD } from '@nestjs/core';
         limit: 3,
       },
     ]),
+    MaterialsModule,
   ],
   controllers: [AppController],
   providers: [

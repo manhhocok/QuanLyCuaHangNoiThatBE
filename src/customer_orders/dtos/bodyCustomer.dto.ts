@@ -1,12 +1,26 @@
-import { bodyProductDto } from 'src/products/dtos/bodyProduct.dto';
-import { bodyUserDto } from 'src/users/dtos/bodyUser.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
+import { Product } from 'src/typeom/entities/product.entity';
+import { User } from 'src/typeom/entities/user.entity';
 
 export class bodyCustomerDto {
-  user: bodyUserDto;
-  product: bodyProductDto;
+  @ApiProperty()
+  @IsNotEmpty()
+  user: User;
+  @ApiProperty()
+  @IsNotEmpty()
+  product: Product;
+  @ApiProperty()
+  @IsNotEmpty()
   voucher: number;
+  @ApiProperty()
+  @IsNotEmpty()
   listed_price: number;
   price: number;
+  @ApiProperty()
+  @IsNotEmpty()
   quantity: number;
+  @ApiProperty()
+  @IsNotEmpty()
   total_price: number;
 }

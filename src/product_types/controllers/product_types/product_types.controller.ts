@@ -7,10 +7,12 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { bodyProductTypeDto } from 'src/product_types/dtos/bodyProductType.dto';
 import { ProductTypesService } from 'src/product_types/services/product_types/product_types.service';
 
-@Controller('api/product_types')
+@ApiTags('product_types')
+@Controller('product_types')
 export class ProductTypesController {
   constructor(private ProductTypesService: ProductTypesService) {}
 

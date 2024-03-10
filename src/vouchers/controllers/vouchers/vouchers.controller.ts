@@ -7,9 +7,11 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { bodyVoucherDto } from 'src/vouchers/dtos/bodyVoucher.dto';
 import { VouchersService } from 'src/vouchers/services/vouchers/vouchers.service';
 
+@ApiTags('Vouchers')
 @Controller('vouchers')
 export class VouchersController {
   constructor(private VouchersService: VouchersService) {}

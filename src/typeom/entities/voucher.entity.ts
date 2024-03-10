@@ -7,6 +7,8 @@ export class Voucher {
   @Column()
   name: string;
   @Column()
+  percent: number;
+  @Column()
   description: string;
   @Column()
   image: string;
