@@ -23,6 +23,12 @@ export class CustomerOrder {
   quantity: number;
   @Column()
   total_price: number;
+
+  @Column()
+  product_id: number;
+  @Column()
+  account_id: number;
+
   @ManyToOne(() => Product, (product) => product.product_id)
   @JoinColumn({ name: 'product_id' })
   product: Product;

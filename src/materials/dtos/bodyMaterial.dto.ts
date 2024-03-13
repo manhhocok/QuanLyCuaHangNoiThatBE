@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-export class bodyMaterialDto {
+export class CreateMaterialDto {
   @ApiProperty()
   @IsNotEmpty()
   name: string;
@@ -10,5 +10,13 @@ export class bodyMaterialDto {
   description: string;
   @ApiProperty()
   @IsNotEmpty()
+  image: string;
+}
+export class UpdateMaterialDto {
+  @ApiProperty()
+  name: string;
+  @ApiProperty()
+  description: string;
+  @ApiProperty()
   image: string;
 }

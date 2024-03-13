@@ -4,15 +4,19 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { bodyProductTypeDto } from 'src/product_types/dtos/bodyProductType.dto';
+import {
+  CreateProductTypeDto,
+  UpdateProductTypeDto,
+} from 'src/product_types/dtos/bodyProductType.dto';
 import { ProductTypesService } from 'src/product_types/services/product_types/product_types.service';
 
 @ApiTags('product_types')
-@Controller('product_types')
+@Controller('api/product_types')
 export class ProductTypesController {
   constructor(private ProductTypesService: ProductTypesService) {}
 
@@ -27,14 +31,14 @@ export class ProductTypesController {
   }
 
   @Post()
-  createProductType(@Body() data: bodyProductTypeDto) {
+  createProductType(@Body() data: CreateProductTypeDto) {
     return this.ProductTypesService.create(data);
   }
 
-  @Put(':type_id')
+  @Patch(':type_id')
   async updateProductType(
     @Param('type_id') type_id: number,
-    @Body() data: bodyProductTypeDto,
+    @Body() data: UpdateProductTypeDto,
   ) {
     await this.ProductTypesService.edit(type_id, data);
     return this.getListProductTypes();

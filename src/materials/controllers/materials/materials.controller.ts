@@ -4,14 +4,18 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { bodyMaterialDto } from 'src/materials/dtos/bodyMaterial.dto';
+import {
+  CreateMaterialDto,
+  UpdateMaterialDto,
+} from 'src/materials/dtos/bodyMaterial.dto';
 import { MaterialsService } from 'src/materials/services/materials/materials.service';
 @ApiTags('materials')
-@Controller('materials')
+@Controller('api/materials')
 export class MaterialsController {
   constructor(private materialsService: MaterialsService) {}
 
@@ -26,13 +30,13 @@ export class MaterialsController {
   }
 
   @Post()
-  async createMaterials(@Body() body: bodyMaterialDto) {
+  async createMaterials(@Body() body: CreateMaterialDto) {
     return await this.materialsService.create(body);
   }
 
-  @Put(':material_id')
+  @Patch(':material_id')
   async updateMaterials(
-    @Body() body: bodyMaterialDto,
+    @Body() body: UpdateMaterialDto,
     @Param('material_id') material_id: number,
   ) {
     await this.materialsService.edit(body, material_id);

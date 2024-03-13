@@ -45,14 +45,14 @@ export type bodyProductParams = {
   description: string;
   image: string;
   status: boolean;
-  material: Material;
-  type: ProductType;
-  category: Category;
+  material_id: number;
+  type_id: number;
+  category_id: number;
 };
 
 export type bodyCustomerOrderParams = {
-  user: User;
-  product: Product;
+  product_id: number;
+  account_id: number;
   voucher: number;
   listed_price: number;
   price: number;

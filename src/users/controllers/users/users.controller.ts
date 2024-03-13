@@ -8,11 +8,11 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { bodyUserDto } from 'src/users/dtos/bodyUser.dto';
+import { CreateyUserDto, UpdateUserDto } from 'src/users/dtos/bodyUser.dto';
 import { UsersService } from 'src/users/service/users/users.service';
 
 @ApiTags('users')
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
@@ -27,14 +27,14 @@ export class UsersController {
   }
 
   @Post()
-  CreateUser(@Body() bodyUserDto: bodyUserDto) {
+  CreateUser(@Body() bodyUserDto: CreateyUserDto) {
     return this.usersService.create(bodyUserDto);
   }
 
   @Put(':account_id')
   async UpdateUser(
     @Param('account_id') account_id: number,
-    @Body() UpdateUser: bodyUserDto,
+    @Body() UpdateUser: UpdateUserDto,
   ) {
     await this.usersService.edit(account_id, UpdateUser);
     return this.GetUsers();

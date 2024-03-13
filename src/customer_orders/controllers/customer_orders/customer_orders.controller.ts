@@ -4,14 +4,18 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { bodyCustomerDto } from 'src/customer_orders/dtos/bodyCustomer.dto';
+import {
+  CreateCustomerDto,
+  UpdateCustomerDto,
+} from 'src/customer_orders/dtos/bodyCustomer.dto';
 import { CustomerOrdersService } from 'src/customer_orders/services/customer_orders/customer_orders.service';
 @ApiTags('customer_orders')
-@Controller('customer_orders')
+@Controller('api/customer_orders')
 export class CustomerOrdersController {
   constructor(private CustomerOrdersService: CustomerOrdersService) {}
 
@@ -26,14 +30,14 @@ export class CustomerOrdersController {
   }
 
   @Post()
-  createCustomerOrder(@Body() body: bodyCustomerDto) {
+  createCustomerOrder(@Body() body: CreateCustomerDto) {
     return this.CustomerOrdersService.create(body);
   }
 
-  @Put(':order_id')
+  @Patch(':order_id')
   async updateCustomerOrder(
     @Param('order_id') order_id: number,
-    @Body() body: bodyCustomerDto,
+    @Body() body: UpdateCustomerDto,
   ) {
     await this.CustomerOrdersService.edit(order_id, body);
     return this.getListCustomerOrders();

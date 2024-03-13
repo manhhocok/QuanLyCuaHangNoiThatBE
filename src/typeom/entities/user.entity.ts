@@ -1,5 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { CustomerOrder } from './customer_order.entity';
+import { Product } from './product.entity';
 
 @Entity({ name: 'user' })
 export class User {
@@ -18,4 +26,15 @@ export class User {
 
   @OneToMany(() => CustomerOrder, (custome) => custome.order_id)
   customerOrder: CustomerOrder[];
+
+  // @ManyToMany(() => Product, (product) => product.favoriteUsers)
+  // @JoinTable({
+  //   name: 'user_favorite',
+  //   joinColumn: { name: 'account_id', referencedColumnName: 'account_id' },
+  //   inverseJoinColumn: {
+  //     name: 'product_id',
+  //     referencedColumnName: 'product_id',
+  //   },
+  // })
+  // favorite: Product[];
 }

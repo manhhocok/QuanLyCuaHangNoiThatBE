@@ -4,15 +4,19 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { bodyProductDto } from 'src/products/dtos/bodyProduct.dto';
+import {
+  CreateProductDto,
+  UpdateProductDto,
+} from 'src/products/dtos/bodyProduct.dto';
 import { ProductsService } from 'src/products/services/products/products.service';
 
 @ApiTags('products')
-@Controller('products')
+@Controller('api/products')
 export class ProductsController {
   constructor(private ProductsService: ProductsService) {}
 
@@ -27,14 +31,14 @@ export class ProductsController {
   }
 
   @Post()
-  createProduct(@Body() body: bodyProductDto) {
+  createProduct(@Body() body: CreateProductDto) {
     return this.ProductsService.create(body);
   }
 
-  @Put(':product_id')
+  @Patch(':product_id')
   async updateProduct(
     @Param('product_id') product_id: number,
-    @Body() body: bodyProductDto,
+    @Body() body: UpdateProductDto,
   ) {
     await this.ProductsService.edit(product_id, body);
     return this.getListProduct();

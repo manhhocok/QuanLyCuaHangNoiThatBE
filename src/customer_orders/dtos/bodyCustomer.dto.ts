@@ -1,15 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { Product } from 'src/typeom/entities/product.entity';
-import { User } from 'src/typeom/entities/user.entity';
 
-export class bodyCustomerDto {
+export class CreateCustomerDto {
   @ApiProperty()
   @IsNotEmpty()
-  user: User;
+  product_id: number;
   @ApiProperty()
   @IsNotEmpty()
-  product: Product;
+  account_id: number;
   @ApiProperty()
   @IsNotEmpty()
   voucher: number;
@@ -22,5 +20,21 @@ export class bodyCustomerDto {
   quantity: number;
   @ApiProperty()
   @IsNotEmpty()
+  total_price: number;
+}
+
+export class UpdateCustomerDto {
+  @ApiProperty()
+  product_id: number;
+  @ApiProperty()
+  account_id: number;
+  @ApiProperty()
+  voucher: number;
+  @ApiProperty()
+  listed_price: number;
+  price: number;
+  @ApiProperty()
+  quantity: number;
+  @ApiProperty()
   total_price: number;
 }

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-export class bodyVoucherDto {
+export class CraeteVoucherDto {
   @ApiProperty()
   @IsNotEmpty()
   name: string;
@@ -13,5 +13,16 @@ export class bodyVoucherDto {
   description: string;
   @ApiProperty()
   @IsNotEmpty()
+  image: string;
+}
+
+export class UpdateVoucherDto {
+  @ApiProperty()
+  name: string;
+  @ApiProperty()
+  percent: number;
+  @ApiProperty()
+  description: string;
+  @ApiProperty()
   image: string;
 }

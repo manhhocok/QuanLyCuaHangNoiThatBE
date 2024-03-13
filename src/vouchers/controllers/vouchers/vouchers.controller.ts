@@ -8,11 +8,14 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { bodyVoucherDto } from 'src/vouchers/dtos/bodyVoucher.dto';
+import {
+  CraeteVoucherDto,
+  UpdateVoucherDto,
+} from 'src/vouchers/dtos/bodyVoucher.dto';
 import { VouchersService } from 'src/vouchers/services/vouchers/vouchers.service';
 
 @ApiTags('Vouchers')
-@Controller('vouchers')
+@Controller('api/vouchers')
 export class VouchersController {
   constructor(private VouchersService: VouchersService) {}
 
@@ -27,14 +30,14 @@ export class VouchersController {
   }
 
   @Post()
-  createVoucher(@Body() bodyVoucherDto: bodyVoucherDto) {
+  createVoucher(@Body() bodyVoucherDto: CraeteVoucherDto) {
     return this.VouchersService.create(bodyVoucherDto);
   }
 
   @Put(':voucher_id')
   async updateVoucher(
     @Param('voucher_id') voucher_id: number,
-    @Body() bodyVoucherDto: bodyVoucherDto,
+    @Body() bodyVoucherDto: UpdateVoucherDto,
   ) {
     await this.VouchersService.edit(voucher_id, bodyVoucherDto);
     return this.getListVouchers();

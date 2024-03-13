@@ -12,6 +12,7 @@ import { Category } from './category.entity';
 import { ProductType } from './product_type.entity';
 import { CustomerOrder } from './customer_order.entity';
 import { Material } from './materials.entity';
+import { User } from './user.entity';
 
 @Entity({ name: 'product' })
 export class Product {
@@ -33,6 +34,14 @@ export class Product {
   image: string;
   @Column({ default: true })
   status: boolean;
+
+  @Column()
+  material_id: number;
+  @Column()
+  type_id: number;
+  @Column()
+  category_id: number;
+
   @ManyToOne(() => Material, (productType) => productType.material_id)
   @JoinColumn({ name: 'material_id' })
   material: Material;
@@ -45,17 +54,9 @@ export class Product {
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
-  // @ManyToMany(() => Category, (category) => category.category_id)
-  // @JoinTable({
-  //   name: 'category',
-  //   joinColumn: { name: 'product_id', referencedColumnName: 'product_id' },
-  //   inverseJoinColumn: {
-  //     name: 'category_id',
-  //     referencedColumnName: 'category_id',
-  //   },
-  // })
-  // category: Category[];
-
   @OneToMany(() => CustomerOrder, (custome) => custome.order_id)
   customerOrder: CustomerOrder[];
+
+  // @ManyToMany(() => User, (user) => user.favorite)
+  // favoriteUsers: User[];
 }
