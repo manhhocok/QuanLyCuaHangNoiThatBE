@@ -21,7 +21,7 @@ export class ProductsService {
       where: {
         product_id,
       },
-      relations: ['category', 'productType'],
+      relations: ['category', 'productType', 'material'],
     });
   }
 
