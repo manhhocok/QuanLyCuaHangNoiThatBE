@@ -1,8 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional } from 'class-validator';
-import { Category } from 'src/typeom/entities/category.entity';
-import { Material } from 'src/typeom/entities/materials.entity';
-import { ProductType } from 'src/typeom/entities/product_type.entity';
 
 export class CreateProductDto {
   @ApiProperty()
@@ -63,4 +60,25 @@ export class UpdateProductDto {
   type_id: number;
   @ApiProperty()
   category_id: number;
+}
+
+export class QueryProductDto {
+  @ApiPropertyOptional()
+  @IsOptional()
+  name?: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  material_id?: number;
+  @ApiPropertyOptional()
+  @IsOptional()
+  type_id?: number;
+  @ApiPropertyOptional()
+  @IsOptional()
+  category_id?: number;
+  @ApiPropertyOptional()
+  @IsOptional()
+  page?: number;
+  @ApiPropertyOptional()
+  @IsOptional()
+  pageSize?: number;
 }
